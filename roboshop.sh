@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SG-ID="sg-06264c970c7d1ae80"
-AMI-IS="ami-0220d79f3f480ecf5"
+SG_ID="sg-06264c970c7d1ae80"
+AMI_ID="ami-0220d79f3f480ecf5"
 
 for instance in $@
 do
@@ -15,14 +15,15 @@ do
 
 
 if [$instance == "frontend"]; then
-IP=$S
+IP=$
    (aws ec2 describe-instance \
    --instnace-ids $INSTANCE_ID \
    --query 'Reservation[].Instance[].PublicIpAddress' \
    --output text 
    )
 else
-   IP=$S(aws ec2 describe-instance \
+   IP=$
+   (aws ec2 describe-instance \
    --instnace-ids $INSTANCE_ID \
    --query 'Reservation[].Instance[].PrivateIpAddress' \
    --output text 
