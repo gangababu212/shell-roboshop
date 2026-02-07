@@ -67,4 +67,4 @@ VALIDATE $? "Created systemctl service"
 systemctl daemon-reload
 systemctl enable cart  &>>$LOGS_FILE
 systemctl start cart
-VALIDATE $? "Starting and enabling car
+VALIDATE $? "Starting and enabling car"
