@@ -2,6 +2,8 @@
 
 SG_ID="sg-06264c970c7d1ae80"
 AMI_ID="ami-0220d79f3f480ecf5"
+ZONE_ID="Z08902251BPAS0UIU9K4C"
+DOMAIN_NAME="gbdaws88s.online"
 
 for instance in $@
 do
@@ -13,6 +15,7 @@ do
   --query 'Instnace[0].InstnaceId' \
   --output text )
 
+  RECORD_NAME="$DOMAIN_NAME" # gbdaws88s.online
 
 if [$instance == "frontend"]; then
 IP=$
@@ -28,13 +31,15 @@ else
    --query 'Reservation[].Instance[].PrivateIpAddress' \
    --output text 
    )
+  RECORD_NAME="$instance.$DOMAIN_NAME" # mongodb.daws88s.onlin
+
 fi
 
 echo "IP Adress: $IP"
 
 aws route53 change-resource-recod-sets \
     --hosted-zone-id $ZONE_ID \
-    --change-batch'
+    --change-batch '
     {
         "Comment": "Updating record",
         "Changes":[
@@ -46,14 +51,14 @@ aws route53 change-resource-recod-sets \
              "TTL": 1,
              "ResourceRecords":[
              {
-                "value": "'$IP"
+                "value": "'$IP'"
              }
              ]
          }
          }
      ]
 }
-,
+'
 echo "record update for $instance"
 
 done
