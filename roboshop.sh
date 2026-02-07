@@ -46,7 +46,7 @@ aws route53 change-resource-recod-sets \
              "TTL": 1,
              "ResourceRecords":[
              {
-                "value": "'$IP'"
+                "value": "'$IP"
              }
              ]
          }
@@ -54,7 +54,6 @@ aws route53 change-resource-recod-sets \
      ]
 }
 ,
-
 echo "record update for $instance"
 
 done
